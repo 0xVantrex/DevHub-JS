@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 1.5rem;
+      background: #f9f9f9;
+    }
+
+    #searchInput {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1.2rem;
+      font-size: 1rem;
+    }
+
+    #profilesContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .profile-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .profile-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-weight: bold;
+      color: #888;
+      padding: 1rem;
+    }
+
+    /* for highlighting search matches */
+    mark {
+      background-color: #ffeb3b; /* or any highlight color you prefer */
+      color: inherit;            /* keep normal text color */
+      padding: 0;                /* remove extra spacing */
+      margin: 0;
+      border-radius: 2px;       
+      font-weight: inherit;      /* avoid bolder highlight text */
+      letter-spacing: normal;    /* ensure no spacing change */
+      line-height: normal;
+    }
+  </style>
+</head>
+<body>
+  <h2>Team Profiles</h2>
+  <input type="text" id="searchInput" placeholder="Search by name or skill..." />
+
+  <div id="profilesContainer"></div>
+
+  <script type="module">
+    import { setupSearch, displayFilteredProfiles } from './search.js';
+
+    // Sample data
+    const profilesArray = [
+      { name: "Alice Kim", skills: ["HTML", "CSS", "JavaScript"] },
+      { name: "Brian Otieno", skills: ["Python", "Django", "API Design"] },
+      { name: "Cynthia Njeri", skills: ["React", "UI Design", "Figma"] },
+      { name: "David Mwangi", skills: ["Node.js", "MongoDB", "Express"] },
+    ];
+
+    // Display all profiles on page load
+    displayFilteredProfiles(profilesArray, "");
+
+    // Enable search/filtering
+    setupSearch(profilesArray);
+  </script>
+</body>
+</html>
